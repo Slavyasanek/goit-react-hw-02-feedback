@@ -1,12 +1,13 @@
-import css from './Section.module.css';
+import { Container, SectionStyle, SectionTitle } from './Section.styled';
+
 const Section = ({children, title}) => {
     return (
-        <section className={css.section}>
-            <div className={css.container}>
-                {title && (<h1>{title}</h1>)}
+        <SectionStyle>
+            <Container>
+                {title && (<SectionTitle>{title}</SectionTitle>)}
                 {children}
-            </div>
-        </section>
+            </Container>
+        </SectionStyle>
     )
 }
 

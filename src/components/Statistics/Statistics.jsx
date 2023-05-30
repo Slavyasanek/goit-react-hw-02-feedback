@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import { StatisticsItem } from './StatisticsItem';
+import { StatisticsList } from './Statistics.styled';
 class Statistics extends Component {
 
     static propTypes = {
@@ -14,14 +15,23 @@ class Statistics extends Component {
     }
 
     render() {
+        let { options, total, positivePercentage } = this.props;
+        positivePercentage = positivePercentage + "%";
         return (
-            <ul>
-                {Object.entries(this.props.options).map(([key, value]) => {
-                    return (<li key={key}>{key} : {value}</li>)
+            <StatisticsList>
+                {Object.entries(options).map(([key, value]) => {
+                    return (<StatisticsItem key={key} option={key} value={value} />)
                 })}
-                <li key="total">Total : {this.props.total}</li>
-                <li key="positivePercantage">Positive percantage : {this.props.positivePercentage} %</li>
-            </ul>
+                <StatisticsItem
+                key="total"
+                option="total"
+                value={total}
+                />
+                <StatisticsItem
+                key="positivePrcentage"
+                option="Positive percentage"
+                value={positivePercentage}/>
+            </StatisticsList>
         )
     }
 }

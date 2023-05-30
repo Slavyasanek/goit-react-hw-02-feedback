@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button, ButtonWrapper } from './FeedbackOptions.styled';
+import {AiFillLike , AiFillDislike} from 'react-icons/ai';
+import {BsEmojiNeutral} from 'react-icons/bs'; 
 
 class FeedbackOptions extends Component {
     static propTypes = {
@@ -7,18 +10,37 @@ class FeedbackOptions extends Component {
         onLeaveFeedback: PropTypes.func.isRequired
     }
     render() {
+        let icon = null;
+        const {options, onLeaveFeedback} = this.props;
+
         return (
-            <div>
-                {this.props.options.map(option => {
+            <ButtonWrapper>
+                {options.map(option => {
+                    console.log(option)
+                    switch(option) {
+                        case 'good':
+                            icon = <AiFillLike />
+                            break;
+                        case 'bad':
+                            icon = <AiFillDislike/>
+                            break;
+                        case 'neutral':
+                            icon = <BsEmojiNeutral/>
+                            break;
+                        default: 
+                        icon = null;
+                        break;
+                    }
                     return (
-                        <button
+                        <Button
                         type='button'
-                        onClick={() => this.props.onLeaveFeedback(option)}
+                        onClick={() => onLeaveFeedback(option)}
                         key={option}
-                        >{option}</button>
+                        feedbackType={option}
+                        >{icon}{option}</Button>
                     )
                 })}
-            </div>
+            </ButtonWrapper>
         )
     }
 }
